@@ -3,14 +3,17 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { getProductBySlug, products } from "@/lib/data/products";
 
-type Params = { params: { slug: string } };
+type Props = {
+  params: Promise<{ slug: string }>;
+};
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
 }
 
-export function generateMetadata({ params }: Params): Metadata {
-  const product = getProductBySlug(params.slug);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const product = getProductBySlug(slug);
   if (!product) return { title: "Product" };
   return {
     title: product.name,
@@ -22,8 +25,9 @@ export function generateMetadata({ params }: Params): Metadata {
   };
 }
 
-export default function ProductDetailPage({ params }: Params) {
-  const product = getProductBySlug(params.slug);
+export default async function ProductDetailPage({ params }: Props) {
+  const { slug } = await params;
+  const product = getProductBySlug(slug);
   if (!product) {
     return (
       <div className="container py-16">

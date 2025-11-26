@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
@@ -18,7 +19,7 @@ export default function Navbar() {
     <header className="sticky top-0 z-40 w-full border-b bg-white/80 backdrop-blur">
       <div className="container h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded bg-brand-600" />
+          <Image src="/logo.svg" alt="Madhav Chemicals" width={40} height={40} className="h-10 w-10" />
           <span className="font-semibold text-lg">Madhav Chemicals</span>
         </Link>
         <nav className="hidden md:flex items-center gap-6">

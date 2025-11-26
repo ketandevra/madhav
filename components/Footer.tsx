@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -6,7 +7,7 @@ export default function Footer() {
       <div className="container py-10 grid gap-8 md:grid-cols-3">
         <div>
           <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded bg-brand-600" />
+            <Image src="/logo.svg" alt="Madhav Chemicals" width={40} height={40} className="h-10 w-10" />
             <span className="font-semibold text-lg">Madhav Chemicals</span>
           </div>
           <p className="mt-3 text-sm text-gray-600">

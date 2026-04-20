@@ -52,9 +52,17 @@ export default async function ProductDetailPage({ params }: Props) {
             <h1 className="text-3xl font-semibold">{product.name}</h1>
             <span className="rounded bg-gray-100 px-2 py-0.5 text-sm text-gray-700">{product.category}</span>
           </div>
-          <div className="mt-4 grid grid-cols-2 gap-4 text-sm">
-            <div className="rounded border p-3"><span className="text-gray-500">Formula</span><div className="font-medium">{product.formula}</div></div>
-            <div className="rounded border p-3"><span className="text-gray-500">CAS</span><div className="font-medium">{product.cas}</div></div>
+          <div className="mt-4 grid gap-4 text-sm">
+            <div className="rounded border p-3">
+              <span className="text-gray-500">Packaging</span>
+              <div className="font-medium">{product.packaging}</div>
+            </div>
+            {product.variants && (
+              <div className="rounded border p-3">
+                <span className="text-gray-500">Variants</span>
+                <div className="font-medium">{product.variants}</div>
+              </div>
+            )}
           </div>
           <p className="mt-4 text-gray-700">{product.description}</p>
           <div className="mt-6 flex gap-3">

@@ -26,8 +26,10 @@ export default function ProductCard({ product }: { product: Product }) {
           <h3 className="font-medium text-gray-900">{product.name}</h3>
           <span className="rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-700">{product.category}</span>
         </div>
-        <p className="mt-1 text-sm text-gray-600">Formula: {product.formula}</p>
-        <p className="text-xs text-gray-500">CAS: {product.cas}</p>
+        <p className="mt-1 text-sm text-gray-700">Packaging: {product.packaging}</p>
+        {product.variants && (
+          <p className="mt-0.5 text-xs text-gray-500">Variants: {product.variants}</p>
+        )}
       </div>
     </Link>
   );

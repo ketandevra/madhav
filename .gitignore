@@ -10,6 +10,9 @@ out/
 dist/
 build/
 
+# OpenNext / Cloudflare
+.open-next/
+
 # Env files
 .env
 .env.local

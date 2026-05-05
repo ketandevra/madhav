@@ -13,5 +13,9 @@
       "binding": "WORKER_SELF_REFERENCE",
       "service": "madhav"
     }
+  ],
+  "routes": [
+    { "pattern": "madhavchemical.in", "custom_domain": true },
+    { "pattern": "www.madhavchemical.in", "custom_domain": true }
   ]
 }

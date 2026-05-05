@@ -3,16 +3,25 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { getProductBySlug, products } from "@/lib/data/products";
 
-type Props = {
-  params: Promise<{ slug: string }>;
+/** Matches Next.js 15 App Router `PageProps` (params/searchParams are Promises). */
+type ProductPageProps = {
+  params: Promise<{ slug?: string | string[] }>;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
+
+function slugFromParams(resolved: { slug?: string | string[] }): string {
+  const raw = resolved.slug;
+  if (typeof raw === "string") return raw;
+  if (Array.isArray(raw) && raw[0]) return raw[0];
+  return "";
+}
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
+export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
+  const slug = slugFromParams(await params);
   const product = getProductBySlug(slug);
   if (!product) return { title: "Product" };
   return {
@@ -25,8 +34,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function ProductDetailPage({ params }: Props) {
-  const { slug } = await params;
+export default async function ProductDetailPage({ params }: ProductPageProps) {
+  const slug = slugFromParams(await params);
   const product = getProductBySlug(slug);
   if (!product) {
     return (

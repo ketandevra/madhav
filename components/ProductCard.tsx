@@ -8,13 +8,13 @@ export default function ProductCard({ product }: { product: Product }) {
       href={`/products/${product.slug}`}
       className="group block overflow-hidden rounded-lg border bg-white shadow-sm hover:shadow-md transition-shadow"
     >
-      <div className="relative h-40 w-full bg-gray-100">
+      <div className="relative h-56 w-full bg-gray-50">
         {product.image ? (
           <Image
             src={product.image}
             alt={product.name}
             fill
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
+            className="object-contain p-4 transition-transform duration-300 group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         ) : (

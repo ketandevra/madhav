@@ -1,4 +1,6 @@
 import Image from "next/image";
+import ProductCard from "@/components/ProductCard";
+import { productCategories, products } from "@/lib/data/products";
 
 export const metadata = {
   title: "Products",
@@ -6,6 +8,10 @@ export const metadata = {
 };
 
 export default function ProductsPage() {
+  const categoryProducts = productCategories.flatMap((category) =>
+    products.filter((product) => product.category === category)
+  );
+
   return (
     <div className="container py-12 sm:py-16">
       <div className="mb-8">
@@ -50,23 +56,21 @@ export default function ProductsPage() {
           Tap or click the card — your browser will open the PDF in a new window
         </div>
       </a>
-      <div className="mb-10 overflow-hidden rounded-lg border bg-white shadow-sm">
-        <div className="relative aspect-[16/9] w-full">
-          <Image
-            src="/product-catalogue.png"
-            alt="Madhav product catalogue"
-            fill
-            priority
-            className="object-contain bg-gray-50"
-            sizes="100vw"
-          />
+      <section aria-labelledby="product-categories-heading">
+        <div className="mb-6 flex items-center justify-between gap-4">
+          <h2 id="product-categories-heading" className="text-2xl font-semibold text-gray-900">
+            Product Categories
+          </h2>
+          <span className="rounded-full bg-brand-50 px-3 py-1 text-xs font-medium text-brand-700">
+            {categoryProducts.length} categories
+          </span>
         </div>
-      </div>
-      {/* <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {products.map((p) => (
-          <ProductCard key={p.slug} product={p} />
-        ))}
-      </div> */}
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {categoryProducts.map((product) => (
+            <ProductCard key={product.slug} product={product} />
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

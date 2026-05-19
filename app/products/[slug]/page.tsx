@@ -52,9 +52,9 @@ export default async function ProductDetailPage({
   return (
     <div className="container py-12 sm:py-16">
       <div className="grid gap-8 lg:grid-cols-2">
-        <div className="relative h-64 w-full rounded-lg overflow-hidden bg-gray-100 sm:h-80">
+        <div className="relative h-64 w-full rounded-lg overflow-hidden bg-gray-50 sm:h-80">
           {product.image ? (
-            <Image src={product.image} alt={product.name} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+            <Image src={product.image} alt={product.name} fill className="object-contain p-6" sizes="(max-width: 1024px) 100vw, 50vw" />
           ) : (
             <div className="h-full w-full bg-gradient-to-br from-brand-100 to-white" />
           )}

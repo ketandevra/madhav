@@ -3,14 +3,24 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { getProductBySlug, products } from "@/lib/data/products";
 
-type Params = { params: { slug: string } };
+function slugFromParams(resolved: { slug?: string | string[] }): string {
+  const raw = resolved.slug;
+  if (typeof raw === "string") return raw;
+  if (Array.isArray(raw) && raw[0]) return raw[0];
+  return "";
+}
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
 }
 
-export function generateMetadata({ params }: Params): Metadata {
-  const product = getProductBySlug(params.slug);
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug?: string | string[] }>;
+}): Promise<Metadata> {
+  const slug = slugFromParams(await params);
+  const product = getProductBySlug(slug);
   if (!product) return { title: "Product" };
   return {
     title: product.name,
@@ -22,8 +32,14 @@ export function generateMetadata({ params }: Params): Metadata {
   };
 }
 
-export default function ProductDetailPage({ params }: Params) {
-  const product = getProductBySlug(params.slug);
+export default async function ProductDetailPage({
+  params,
+}: {
+  params: Promise<{ slug?: string | string[] }>;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const slug = slugFromParams(await params);
+  const product = getProductBySlug(slug);
   if (!product) {
     return (
       <div className="container py-16">
@@ -36,9 +52,9 @@ export default function ProductDetailPage({ params }: Params) {
   return (
     <div className="container py-12 sm:py-16">
       <div className="grid gap-8 lg:grid-cols-2">
-        <div className="relative h-64 w-full rounded-lg overflow-hidden bg-gray-100 sm:h-80">
+        <div className="relative h-64 w-full rounded-lg overflow-hidden bg-gray-50 sm:h-80">
           {product.image ? (
-            <Image src={product.image} alt={product.name} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+            <Image src={product.image} alt={product.name} fill className="object-contain p-6" sizes="(max-width: 1024px) 100vw, 50vw" />
           ) : (
             <div className="h-full w-full bg-gradient-to-br from-brand-100 to-white" />
           )}
@@ -48,9 +64,17 @@ export default function ProductDetailPage({ params }: Params) {
             <h1 className="text-3xl font-semibold">{product.name}</h1>
             <span className="rounded bg-gray-100 px-2 py-0.5 text-sm text-gray-700">{product.category}</span>
           </div>
-          <div className="mt-4 grid grid-cols-2 gap-4 text-sm">
-            <div className="rounded border p-3"><span className="text-gray-500">Formula</span><div className="font-medium">{product.formula}</div></div>
-            <div className="rounded border p-3"><span className="text-gray-500">CAS</span><div className="font-medium">{product.cas}</div></div>
+          <div className="mt-4 grid gap-4 text-sm">
+            <div className="rounded border p-3">
+              <span className="text-gray-500">Packaging</span>
+              <div className="font-medium">{product.packaging}</div>
+            </div>
+            {product.variants && (
+              <div className="rounded border p-3">
+                <span className="text-gray-500">Variants</span>
+                <div className="font-medium">{product.variants}</div>
+              </div>
+            )}
           </div>
           <p className="mt-4 text-gray-700">{product.description}</p>
           <div className="mt-6 flex gap-3">

@@ -11,10 +11,17 @@ export const metadata: Metadata = {
     default: "Madhav Chemicals",
     template: "%s | Madhav Chemicals",
   },
-  description: "Industrial and specialty chemicals supplier. Bulk & packaged sales with compliance and on-time delivery.",
+  description: "Manufacture all types of home care products. Quality, compliance, and on-time delivery.",
+  icons: {
+    icon: [
+      { url: "/logo.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" }
+    ],
+    apple: "/logo.svg",
+  },
   openGraph: {
     title: "Madhav Chemicals",
-    description: "Industrial and specialty chemicals supplier. Bulk & packaged sales with compliance and on-time delivery.",
+    description: "Manufacture all types of home care products. Quality, compliance, and on-time delivery.",
     type: "website",
     url: "https://www.madhavchemicals.example",
   },

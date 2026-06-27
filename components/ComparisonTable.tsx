@@ -12,7 +12,7 @@ const FEATURES = [
 export default function ComparisonTable() {
   return (
     <div className="overflow-hidden rounded-2xl border border-stone-200/80 bg-white shadow-sm">
-      <div className="overflow-x-auto">
+      <div className="max-w-full overflow-x-auto overscroll-x-contain">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-stone-100">

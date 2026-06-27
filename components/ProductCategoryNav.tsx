@@ -85,7 +85,7 @@ export default function ProductCategoryNav({ categories }: { categories: Categor
       className="fixed inset-x-0 top-16 z-40 border-b border-gray-200 bg-white/95 shadow-sm backdrop-blur-md"
     >
       <div className="container py-2.5">
-        <div className="flex gap-2 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="-mx-4 flex gap-2 overflow-x-auto overscroll-x-contain px-4 pb-0.5 sm:mx-0 sm:px-0 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {categories.map((category) => {
             const isActive = activeSlug === category.slug;
             return (

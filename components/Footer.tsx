@@ -19,7 +19,7 @@ const companyLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative z-10 mt-auto w-full shrink-0 border-t-4 border-brand-600 bg-slate-950 text-white">
+    <footer className="relative z-10 mt-auto w-full shrink-0 overflow-hidden border-t-4 border-brand-600 bg-slate-950 text-white">
       <div
         className="pointer-events-none absolute -left-24 top-0 h-64 w-64 rounded-full bg-quality-premium-500/10 blur-3xl"
         aria-hidden

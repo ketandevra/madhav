@@ -13,11 +13,8 @@ export const metadata: Metadata = {
   },
   description: "Manufacture all types of home care products. Quality, compliance, and on-time delivery.",
   icons: {
-    icon: [
-      { url: "/logo.svg", type: "image/svg+xml" },
-      { url: "/favicon.ico", sizes: "any" }
-    ],
-    apple: "/logo.svg",
+    icon: [{ url: "/logo-nav.png", type: "image/png" }],
+    apple: "/logo-nav.png",
   },
   openGraph: {
     title: "Madhav Chemicals",
@@ -33,7 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={`${inter.className} min-h-screen flex flex-col`}>
         <Navbar />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 pt-16 pb-0">{children}</main>
         <Footer />
       </body>
     </html>

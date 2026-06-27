@@ -7,8 +7,13 @@
   --bg: #ffffff;
 }
 
-html, body {
-  height: 100%;
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  min-height: 100%;
 }
 
 body {
@@ -16,6 +21,6 @@ body {
 }
 
 .container {
-  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  @apply mx-auto w-full max-w-none px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16;
 }
 
